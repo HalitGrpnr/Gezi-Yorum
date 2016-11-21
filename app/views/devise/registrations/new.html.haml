@@ -1,0 +1,39 @@
+-# .col-xs-12.col-sm-5.col-sm-offset-5
+-#   %h2 Sign up
+-#   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+-#     = devise_error_messages!
+-#     .field
+-#       = f.label :email
+-#       %br/
+-#       = f.email_field :email, autofocus: true
+-#     .field
+-#       = f.label :password
+-#       - if @minimum_password_length
+-#         %em
+-#           (#{@minimum_password_length} characters minimum)
+-#       %br/
+-#       = f.password_field :password, autocomplete: "off"
+-#     .field
+-#       = f.label :password_confirmation
+-#       %br/
+-#       = f.password_field :password_confirmation, autocomplete: "off"
+-#     .actions
+-#       = f.submit "Sign up"
+-#   = render "devise/shared/links"
+.row
+  .col-xs-12.col-sm-5.col-sm-offset-4
+    %h2.title Sign Up
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = f.error_notification
+      .form-inputs
+        = f.input :name, autofocus: true
+        = f.input :surname, autofocus: true
+        = f.input :birthday, :start_year => Time.now.year - 80, :end_year => Time.now.year, autofocus: true
+        = f.input :gender, collection: [:Male, :Female] 
+        = f.input :location, autofocus: true
+        = f.input :email,  autofocus: true
+        = f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+        = f.input :password_confirmation
+      .form-actions
+        = f.button :submit, "Sign up"
+    .render= render "devise/shared/links"

@@ -1,0 +1,67 @@
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :avatar
+    %br/
+    = f.file_field :avatar
+  .field
+    %br/
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    %br/
+    = f.label :surname
+    %br/
+    = f.text_field :surname
+  .field
+    %br/
+    = f.label :birthday
+    %br/
+    = f.date_select :birthday, :start_year => Time.now.year - 80, :end_year => Time.now.year
+
+  .radio_button
+    %br/
+    = f.label :gender
+    %br/
+    = f.radio_button :gender, 'Male'
+    Male
+    = f.radio_button :gender, 'Female'
+    Female
+
+  .field
+    %br/
+    = f.label :bio
+    %br/
+    = f.text_area :bio
+  .field
+    %br/
+    = f.label :location
+    %br/
+    = f.text_field :location
+  %br/
+  .actions
+    = f.submit
+
+  %br/
+  %p=link_to "Change Password", edit_user_registration_path
+
+-# = simple_form_for @user do |f|
+-#   .form-inputs
+-#     -# = f.file :avatar, label: 'Avatar'
+-#     = f.input :name, label: 'Name'
+-#     = f.input :surname, label: 'Surname'
+-#     = f.input :gender, collection: [:male, :female], as: :radio_buttons
+-#     = f.input :birthday, as: :date, start_year: Date.today.year - 90, |
+-#   end_year: Date.today.year - 12, discard_day: true,                   |
+-#   order: [:day, :month, :year]                                               |
+-#     = f.input :email, placeholder: 'user@domain.com'
+-#   .form-actions
+-#     = f.button :submit

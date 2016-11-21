@@ -1,0 +1,9 @@
+#posts
+  - @users.each do |user|
+    - if !user.blocks.include?(current_user)
+      .post
+        %td.user_avatar
+          = image_tag user.avatar.url(:thumb)
+        %td.user_info
+          = link_to user.name + " " + user.surname , user
+          %p= user.location

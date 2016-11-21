@@ -1,0 +1,138 @@
+.container { position:relative; padding:0 0 0 55px; }
+#sidebar {
+    position:absolute;
+    top:0; bottom:0; left:0;
+    width:300px;
+    height:400px;
+
+    .data {
+      width: 40%;
+      // float: left;
+
+      .data {
+        width: 100%;
+        display: block;
+        padding: .75rem 0;
+        border-bottom: 1px solid #E9E9E9;
+        text-decoration: none;
+        color: #969696;
+        margin: 0;
+      }
+    }
+
+    .followers{
+
+    }
+}
+
+#map { border:1px solid #000; width:1000px; height:200px;
+    margin:0 0 5px 100;
+}
+
+#content {
+  // .post {
+  //   background: #F8F9FA;
+  //   width: 30%;
+  //   float: left;
+  //   margin: 1rem 1.5%;
+  //   border: 1px solid #E4E4E4;
+  //   border-radius: 0.3rem;
+    .user_info{
+      background: #E4E4E4;
+    }
+  // }
+    border:1px solid #000; width:100px; height:250px;
+    margin:5px 0 5px 400px;
+
+
+  .post_content_at_users{
+      width:350px; height:150px;
+      border:1px solid #000;
+      margin:0 0 5px 0;
+      h2 {
+        margin: 0;
+        font-weight: 100;
+        padding: 1rem 5%;
+        border-bottom: 1px solid #E4E4E4;
+        font-size: 1.25rem;
+        a {
+          text-decoration: none;
+          color: #333233;
+          &:hover {
+            color: #50A7C7;
+          }
+        }
+      }
+      .data {
+        padding: .75rem 5%;
+        color: #969696;
+        .username, .buttons {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+        // .username {
+        // 	float: left;
+        // }
+        .buttons {
+          float: center;
+          span {
+            margin-left: .5rem;
+          }
+        }
+      }
+  }
+}
+// #content {
+	// .post {
+	// 	background: #F8F9FA;
+	// 	width: 30%;
+	// 	float: left;
+	// 	margin: 1rem 1.5%;
+	// 	border: 1px solid #E4E4E4;
+	// 	border-radius: 0.3rem;
+	// 	.user_info{
+	// 		background: #E4E4E4;
+	// 	}
+		// .post_image {
+		// 	height: 200px;
+		// 	overflow: hidden;
+		// 	img {
+		// 		width: 100%;
+		// 		border-radius: .3rem .3rem 0 0;
+		// 	}
+		// }
+// 		.post_content {
+			// h2 {
+			// 	margin: 0;
+			// 	font-weight: 100;
+			// 	padding: 1rem 5%;
+			// 	border-bottom: 1px solid #E4E4E4;
+			// 	font-size: 1.25rem;
+			// 	a {
+			// 		text-decoration: none;
+			// 		color: #333233;
+			// 		&:hover {
+			// 			color: #50A7C7;
+			// 		}
+			// 	}
+			// }
+			// .data {
+			// 	padding: .75rem 5%;
+			// 	color: #969696;
+			// 	.username, .buttons {
+			// 		margin: 0;
+			// 		font-size: 1.5rem;
+			// 	}
+			// 	// .username {
+			// 	// 	float: left;
+			// 	// }
+			// 	.buttons {
+			// 		float: center;
+			// 		span {
+			// 			margin-left: .5rem;
+			// 		}
+			// 	}
+			// }
+// 		}
+// 	}
+// }

@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Listing Complains
+%table
+  %thead
+    %tr
+      %th User
+      %th Post
+      %th Content
+      %th{:colspan => "3"}
+  %tbody
+    - @complains.each do |complain|
+      %tr
+        %td= complain.user_id
+        %td= complain.post_id
+        %td= complain.content
+        %td= link_to 'Show', complain
+        %td= link_to 'Edit', edit_complain_path(complain)
+        %td= link_to 'Destroy', complain, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Complain', new_complain_path

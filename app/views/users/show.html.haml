@@ -1,0 +1,142 @@
+- if !@user.blocks.include?(current_user)
+  %script{:src => "//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry", :type => "text/javascript"}
+  %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type => "text/javascript"}
+
+  #map{:style => "width: 1050px; height: 250px;"}
+    :javascript
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(#{raw @hash.to_json});
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+
+  .container
+    #sidebar
+      -# #avatar
+      = image_tag @user.avatar.url(:thumb)
+      .user_intro
+        %p
+          = @user.name + " "+ @user.surname
+        %p
+          %strong Birthday:
+          = @user.birthday
+        %p
+          %strong Bio:
+          = @user.bio
+        %p
+          %strong Location:
+          = @user.location
+        %p
+          %strong Location Count:
+          = @user.posts.count
+      %p.data
+        %p.buttons
+          - if @user == current_user
+            = link_to edit_user_path(@user), class: "data" do
+              %i.fa.fa-pencil-square-o
+              = "Edit Profile"
+          - elsif current_user.blocks.include?(@user)
+            %p.buttons
+              = link_to unblock_user_path(@user), class: "data" do
+                %i.fa.fa-unlock-alt
+                = "Unblock"
+          - else
+            -if current_user.following?(@user)
+              = link_to unfollow_user_path(@user), class: "data" do
+                %i.fa.fa-minus-circle
+                = "Unfollow"
+            - else
+              = link_to follow_user_path(@user), class: "data" do
+                %i.fa.fa-plus-circle
+                = "Follow"
+            %br/
+            = link_to block_user_path(@user), class: "data" do
+              %i.fa.fa-ban
+              = "Block"
+      -# %p.data
+      -#   - if @user == current_user
+      -#     = link_to edit_user_path(@user), class: "data" do
+      -#       %i.fa.fa-pencil-square-o
+      -#       = "Edit Profile"
+      -#   - elsif current_user.following?(@user)
+      -#     %p.buttons
+      -#       = link_to unfollow_user_path(@user), class: "data" do
+      -#         %glyphicon.glyphicon-plus
+      -#         = "Unfollow"
+      -#     - if current_user.blocks.include?(@user)
+      -#       = link_to unblock_user_path(@user), class: "data" do
+      -#         %i.fa.fa-unlock-alt
+      -#         = "Unblock"
+      -#     - else
+      -#       = link_to block_user_path(@user), class: "data" do
+      -#         %i.fa.fa-ban
+      -#         = "Block"
+      -#
+      -#   - else
+      -#     %p.buttons
+      -#       = link_to follow_user_path(@user), class: "data" do
+      -#         %i.fa.fa-plus-circle
+      -#         = "Follow"
+      -#     - if current_user.blocks.include?(@user)
+      -#       = link_to unblock_user_path(@user), class: "data" do
+      -#         %i.fa.fa-unlock-alt
+      -#         = "Unblock"
+      -#     - else
+      -#       = link_to block_user_path(@user), class: "data" do
+      -#         %i.fa.fa-ban
+      -#         = "Block"
+      -#
+      %p.followers
+        Followers:
+        - @user.followers_count
+        - @user.followers.each do |follower|
+          %li= link_to follower.name + " " + follower.surname, follower
+          - if @user == current_user
+            = link_to stop_follow_user_path(follower), class: "data" do
+              %i.fa.fa-times-circle
+              = "Stop Following"
+            = link_to block_user_path(follower), class: "data" do
+              %i.fa.fa-ban
+              = "Block"
+      %br/
+      %p.follows
+        Followings:
+        - @user.all_following.each do |following|
+          %li= link_to following.name + " " + following.surname, following
+          - if @user == current_user
+            = link_to unfollow_user_path(following), class: "data" do
+              %i.fa.fa-times-circle
+              = "Unfollow"
+            = link_to block_user_path(following), class: "data" do
+              %i.fa.fa-ban
+              = "Block"
+
+    #content
+      - @user.posts.each do |post|
+        .post
+          %td.user_avatar
+            = image_tag post.user.avatar.url(:thumb)
+          %td.user_info
+            = link_to post.user.name + " " + post.user.surname , post.user
+          .post_image
+            = link_to (image_tag post.avatar.url(:small)), post
+          .post_content_at_users
+            .title
+              %h2= link_to post.title, post
+            .data.clearfix
+              %p.buttons
+                = link_to like_post_path(post), method: :get, class: "data" do
+                  %i.fa.fa-thumbs-o-up
+                  = pluralize(post.get_upvotes.size, "Like")
+                %span
+                  -# %i.fa.fa-comments-o
+                  -# = pluralize(post.comments.count, "Comment")
+                  = link_to post, method: :get, class: "data" do
+                    %i.fa.fa-comments-o
+                    = pluralize(post.comments.count, "Comment")
+
+
+    #footer
+- else
+  Ooopsss! You can not show this user!

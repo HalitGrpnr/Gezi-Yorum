@@ -1,0 +1,49 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "users.scss";
+@import "posts.scss";
+@import "simple_form.scss";
+@import "home.scss";
+@import "comments.scss";
+
+body{
+  background: #f4ffff;
+}
+header{
+  .navbar.navbar-default{
+    background: #C0C0C0;
+
+  }
+  #bs-example-navbar-collapse-1.collapse.navbar-collapse{
+    .nav.navbar-nav{
+      float: right;
+      .search{
+        // width: 100%;
+        margin: 1rem 0;
+        min-height: 15px;
+        border: .9px solid #EEEEDE;
+
+        border-radius: 0.3rem;
+        .search2{
+          // width: 500px;
+        }
+        .btn{
+          width: 30px;
+          height: 30px;
+          border-radius: 10px;
+          padding-left: 8px;
+          .fa.fa-search{
+            padding-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.title{
+  margin-left: 120px;
+}
+.render{
+  margin-left: 120px;
+}

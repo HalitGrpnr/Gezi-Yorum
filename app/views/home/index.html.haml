@@ -1,0 +1,67 @@
+- if user_signed_in? & current_user.is_admin!=true
+	%p#intro
+		Hello
+		= current_user.name
+		%br/
+		%span
+			Share your travels and see what's sharing others.
+		-# #posts
+		-# 	- current_user.all_following.each do |following|
+		-# 		- following.posts.each do |post|
+		-# 			.post
+		-# 				%td.user_avatar
+		-# 					= image_tag post.user.avatar.url(:thumb)
+		-# 				%td.user_info
+		-# 					= link_to post.user.name + " " + post.user.surname , post.user
+		-# 					= time_ago_in_words(post.created_at)
+		-# 				%p.buttons
+		-# 					%i.fa.fa-map-marker
+		-# 					= post.address
+		-# 				.post_image
+		-# 					= link_to (image_tag post.avatar.url(:small)), post
+		-# 				.post_content
+		-# 					.title
+		-# 						%h2= link_to post.title, post
+		-# 					.content
+		-# 						%h2= truncate(post.content, length: 44) {link_to "Continue", post}
+		-# 					.data.clearfix
+		-# 						%p.buttons
+		-# 							= link_to like_post_path(post), method: :get, class: "data" do
+		-# 								%i.fa.fa-thumbs-o-up
+		-# 								= pluralize(post.get_upvotes.size, "Like")
+		-# 							%span
+		-# 								-# %i.fa.fa-comments-o
+		-# 								-# = pluralize(post.comments.count, "Comment")
+		-# 								= link_to post, method: :get, class: "data" do
+		-# 									%i.fa.fa-comments-o
+		-# 									= pluralize(post.comments.count, "Comment")
+		#posts
+			- @posts.each do |post|
+				- if current_user.following?(post.user)
+					.post
+						%td.user_avatar
+							= image_tag post.user.avatar.url(:thumb)
+						%td.user_info
+							= link_to post.user.name + " " + post.user.surname , post.user
+							= time_ago_in_words(post.created_at)
+						%p.buttons
+							%i.fa.fa-map-marker
+							= post.address
+						.post_image
+							= link_to (image_tag post.avatar.url(:small)), post
+						.post_content
+							.title
+								%h2= link_to post.title, post
+							.content
+								%h2= truncate(post.content, length: 43) {link_to "Continue", post}
+							.data.clearfix
+								%p.buttons
+									= link_to like_post_path(post), method: :get, class: "data" do
+										%i.fa.fa-thumbs-o-up
+										= pluralize(post.get_upvotes.size, "Like")
+									%span
+										-# %i.fa.fa-comments-o
+										-# = pluralize(post.comments.count, "Comment")
+										= link_to post, method: :get, class: "data" do
+											%i.fa.fa-comments-o
+											= pluralize(post.comments.count, "Comment")
